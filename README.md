@@ -1,7 +1,8 @@
 fantlab_pub
 ===========
 
-Репозиторий с публичными тикетами для Фантлаба
+Репозиторий с задачками по коду для Фантлаба.
+Актуальные тикеты см в Issues - https://github.com/parserpro/fantlab_pub/issues
 
 
 **Help Wanted (Intro)**
