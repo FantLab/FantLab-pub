@@ -19,6 +19,7 @@ function ticketsToggle()
       <option>Добавить / Дополнить издание</option>\
       <option>Подтвердить (Озеленить) издание</option>\
       <option>Добавить произведение автору</option>\
+      <option>Прислать интересный факт (для примечания)</option>\
       </select><br><br>\
       <div id="tbl"></div>\
       <input type="hidden" name="tickets_add_new" value="yes">\
@@ -64,46 +65,52 @@ function select_ttype()
      <td width="100%"><textarea id="tickets_txt" name="tickets_txt" style="border:1px solid black;width:100%;height:150px"></textarea>\
      </td></tr>';
   } break;
-   case 1: {
-  // 	if (ur.indexOf('edition')==-1) {f=false; break; }
-  s+='Название</td> <td width="100%">';
- // nm=document.querySelector('[itemprop=name]').textContent;
-  s+= '<input type="edit" id="t_name" name="t_name" value="" style="width:100%"></td></tr>';
- // nm=document.querySelector('[itemprop=author]').textContent;
-  s+= '<tr><td>Автор</td><td><input type="edit" id="t_autors" name="t_autors" value="" style="width:100%"></td></tr> ';
+     case 1: {
+   // 	добавить издание
+    s+='Название</td> <td width="100%">';
+    // nm=document.querySelector('[itemprop=name]').textContent;
+    s+= '<input type="edit" id="t_name" name="t_name" value="" style="width:100%"></td></tr>';
+    // nm=document.querySelector('[itemprop=author]').textContent;
+    s+= '<tr><td>Автор</td><td><input type="edit" id="t_autors" name="t_autors" value="" style="width:100%"></td></tr> ';
+    
+    s+= '<tr><td>Язык</td><td><input type="edit" id="t_language" name="t_language" value="русский"></td></tr> ';
   
-  s+= '<tr><td>Язык</td><td><input type="edit" id="t_language" name="t_language" value="русский"></td></tr> ';
-
-  //nm=document.querySelector('[itemprop=publisher]').textContent;
-  s+= '<tr><td>Издательство</td><td><input type="edit" id="t_publisher" name="t_publisher" value="" style="width:100%"></td></tr> ';
+    //nm=document.querySelector('[itemprop=publisher]').textContent;
+    s+= '<tr><td>Издательство</td><td><input type="edit" id="t_publisher" name="t_publisher" value="" style="width:100%"></td></tr> ';
+    
+    s+= '<tr><td>Серия</td><td><input type="edit" id="t_series" name="t_series" style="width:100%"></td></tr> ';
+    
+    //nm=document.querySelector('[itemprop=copyrightYear]').textContent;
+    s+= '<tr><td>Год</td><td><input type="edit" id="t_year" name="t_year" value="" style="width:50px"></td></tr> ';
+    s+= '<tr><td>Тираж</td><td><input type="edit" id="t_count" name="t_count"></td></tr> ';
   
-  s+= '<tr><td>Серия</td><td><input type="edit" id="t_series" name="t_series" style="width:100%"></td></tr> ';
+    //nm=document.querySelector('[itemprop=isbn]').textContent;
+    s+= '<tr><td>ISBN</td><td><input type="edit" id="t_isbn" name="t_isbn" value="" style="width:100%"></td></tr> ';
   
-  //nm=document.querySelector('[itemprop=copyrightYear]').textContent;
-  s+= '<tr><td>Год</td><td><input type="edit" id="t_year" name="t_year" value="" style="width:50px"></td></tr> ';
-  s+= '<tr><td>Тираж</td><td><input type="edit" id="t_count" name="t_count"></td></tr> ';
-
-  //nm=document.querySelector('[itemprop=isbn]').textContent;
-  s+= '<tr><td>ISBN</td><td><input type="edit" id="t_isbn" name="t_isbn" value="" style="width:100%"></td></tr> ';
-
-  //nm=document.querySelector('[itemprop=bookFormat]').textContent;
-  s+= '<tr><td>Тип обложки</td><td><input type="edit" id="t_covertype" name="t_covertype" value="" style="width:100%"></td></tr> ';
-  s+= '<tr><td>Формат</td><td><input type="edit" id="t_format" name="t_format"></td></tr> ';
-
-  s+= '<tr><td>Описание</td><td><textarea id="t_descript" name="t_descript" style="width:100%;height:40px"></textarea></td></tr> ';
-  s+= '<tr><td>Содержание</td><td><textarea id="t_content" name="t_content" style="width:100%;height:80px"></textarea></td></tr> ';
-  s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:40px"></textarea></td></tr> ';
-  s+= '<tr><td></td><td align="center"><label><input id="t_green" name="t_green" type="checkbox">Информация внесена с бумажной книги, полная и достоверная (можно ставить зелёную рамку)</label>';
+    //nm=document.querySelector('[itemprop=bookFormat]').textContent;
+    s+= '<tr><td>Тип обложки</td><td><input type="edit" id="t_covertype" name="t_covertype" value="" style="width:100%"></td></tr> ';
+    s+= '<tr><td>Формат</td><td><input type="edit" id="t_format" name="t_format"></td></tr> ';
+  
+    s+= '<tr><td>Описание</td><td><textarea id="t_descript" name="t_descript" style="width:100%;height:40px"></textarea></td></tr> ';
+    s+= '<tr><td>Содержание</td><td><textarea id="t_content" name="t_content" style="width:100%;height:80px"></textarea></td></tr> ';
+    s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:40px"></textarea></td></tr> ';
+    s+= '<tr><td></td><td align="center"><label><input id="t_green" name="t_green" type="checkbox">Информация внесена с бумажной книги, полная и достоверная (можно ставить зелёную рамку)</label>';
     }break;
     case 2: {
-  //    if (ur.indexOf('edition')==-1) {f=false;; break; }
+  //    озеленить
      s+= '<tr><td></td><td align="center"><label><input id="t_green" name="t_green" type="checkbox">Подтверждаю: сверено с бумажной книгой - информация в карточке издания полная и достоверная, можно ставить зелёную рамку</label>';	
 	 s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:40px"></textarea></td></tr> ';
 }    break;
     case 3: {
-   //   if (ur.indexOf('autor')==-1) {f=false;; break; }
+   //   добавить ворк
 	s+= '<tr><td>Год</td><td><input type="edit" id="t_year" name="t_year"></td></tr> ';
-	s+='<tr><td>Название</td> <td width="100%"><input type="edit" id="t_name" name="t_name" style="width:100%"></td></tr>';
+	s+= '<tr><td>Название</td> <td width="100%"><input type="edit" id="t_name" name="t_name" style="width:100%"></td></tr>';
+	s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:30px"></textarea></td></tr> ';
+	s+= '<tr><td>Ссылка на источник</td> <td width="100%"><input type="edit" id="t_url" name="t_url" style="width:100%"></td></tr>';
+}    break;
+    case 4: {
+   //   интересный факт
+    s+= '<tr><td>Интересный факт</td><td><textarea id="t_content" name="t_content" style="width:100%;height:80px"></textarea></td></tr> ';
 	s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:30px"></textarea></td></tr> ';
 	s+='<tr><td>Ссылка на источник</td> <td width="100%"><input type="edit" id="t_url" name="t_url" style="width:100%"></td></tr>';
 }    break;
@@ -163,6 +170,12 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
   case 3: {
 	s='Год: '+document.getElementById("t_year").value+'\n\
 Название: '+document.getElementById("t_name").value+'\n\
+Примечание: '+document.getElementById("t_note").value+'\n\
+Источник: '+document.getElementById("t_url").value;
+
+  } break;
+  case 4: {
+	s='Интересный факт: '+document.getElementById("t_content").value+'\n\
 Примечание: '+document.getElementById("t_note").value+'\n\
 Источник: '+document.getElementById("t_url").value;
 
