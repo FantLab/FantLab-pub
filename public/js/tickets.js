@@ -13,13 +13,13 @@ function ticketsToggle()
 	
 	var s='<div id="ticketsdiv" width="100%">\
       <form name="ticketsform" action="/addticket" method="post" enctype="multipart/form-data">\
-      РўРёРї Р·Р°СЏРІРєРё: \
+      Тип заявки: \
       <select id="tickets_type" name="tickets_type" style="border:1px solid black;" onchange="select_ttype();">\
-      <option>РћР±С‰Р°СЏ Р·Р°СЏРІРєР°</option>\
-      <option>Р”РѕР±Р°РІРёС‚СЊ / Р”РѕРїРѕР»РЅРёС‚СЊ РёР·РґР°РЅРёРµ</option>\
-      <option>РџРѕРґС‚РІРµСЂРґРёС‚СЊ (РћР·РµР»РµРЅРёС‚СЊ) РёР·РґР°РЅРёРµ</option>\
-      <option>Р”РѕР±Р°РІРёС‚СЊ РїСЂРѕРёР·РІРµРґРµРЅРёРµ Р°РІС‚РѕСЂСѓ</option>\
-      <option>РџСЂРёСЃР»Р°С‚СЊ РёРЅС‚РµСЂРµСЃРЅС‹Р№ С„Р°РєС‚ (РґР»СЏ РїСЂРёРјРµС‡Р°РЅРёСЏ)</option>\
+      <option>Общая заявка</option>\
+      <option>Добавить / Дополнить издание</option>\
+      <option>Подтвердить (Озеленить) издание</option>\
+      <option>Добавить произведение автору</option>\
+      <option>Прислать интересный факт (для примечания)</option>\
       </select><br><br>\
       <div id="tbl"></div>\
       <input type="hidden" name="tickets_add_new" value="yes">\
@@ -55,73 +55,76 @@ function select_ttype()
   tbl.innerHTML = '';  
   
   var s='<table width="600" cellpadding="2" cellspacing="0"><tr valign="top" align="left">\
-      <td><B>РўРµРјР° Р·Р°СЏРІРєРё</B></td><td width="100%">\
+      <td><B>Тема заявки</B></td><td width="100%">\
       <input id="tickets_name" name="tickets_name" type="text" style="border:1px solid black;width:100%" value="'+nm+'">\
       </td></tr><tr valign="top" align="left"><td>';
   switch(index)
   {
   case 0: {
-   s+='<nobr>РћРїРёС€РёС‚Рµ, С‡С‚Рѕ РЅСѓР¶РЅРѕ</nobr><br>РёСЃРїСЂР°РІРёС‚СЊ РёР»Рё РґРѕРїРѕР»РЅРёС‚СЊ</td>\
+   s+='<nobr>Опишите, что нужно</nobr><br>исправить или дополнить</td>\
      <td width="100%"><textarea id="tickets_txt" name="tickets_txt" style="border:1px solid black;width:100%;height:150px"></textarea>\
      </td></tr>';
   } break;
      case 1: {
-   // 	РґРѕР±Р°РІРёС‚СЊ РёР·РґР°РЅРёРµ
-    s+='РќР°Р·РІР°РЅРёРµ</td> <td width="100%">';
+   // 	добавить издание
+    s+='Название</td> <td width="100%">';
     // nm=document.querySelector('[itemprop=name]').textContent;
     s+= '<input type="edit" id="t_name" name="t_name" value="" style="width:100%"></td></tr>';
     // nm=document.querySelector('[itemprop=author]').textContent;
-    s+= '<tr><td>РђРІС‚РѕСЂ</td><td><input type="edit" id="t_autors" name="t_autors" value="" style="width:100%"></td></tr> ';
+    s+= '<tr><td>Автор</td><td><input type="edit" id="t_autors" name="t_autors" value="" style="width:100%"></td></tr> ';
     
-    s+= '<tr><td>РЇР·С‹Рє</td><td><input type="edit" id="t_language" name="t_language" value="СЂСѓСЃСЃРєРёР№"></td></tr> ';
+    s+= '<tr><td>Язык</td><td><input type="edit" id="t_language" name="t_language" value="русский"></td></tr> ';
   
     //nm=document.querySelector('[itemprop=publisher]').textContent;
-    s+= '<tr><td>РР·РґР°С‚РµР»СЊСЃС‚РІРѕ</td><td><input type="edit" id="t_publisher" name="t_publisher" value="" style="width:100%"></td></tr> ';
+    s+= '<tr><td>Издательство</td><td><input type="edit" id="t_publisher" name="t_publisher" value="" style="width:100%"></td></tr> ';
     
-    s+= '<tr><td>РЎРµСЂРёСЏ</td><td><input type="edit" id="t_series" name="t_series" style="width:100%"></td></tr> ';
+    s+= '<tr><td>Серия</td><td><input type="edit" id="t_series" name="t_series" style="width:100%"></td></tr> ';
     
     //nm=document.querySelector('[itemprop=copyrightYear]').textContent;
-    s+= '<tr><td>Р“РѕРґ</td><td><input type="edit" id="t_year" name="t_year" value="" style="width:50px"></td></tr> ';
-    s+= '<tr><td>РўРёСЂР°Р¶</td><td><input type="edit" id="t_count" name="t_count"></td></tr> ';
+    s+= '<tr><td>Год</td><td><input type="edit" id="t_year" name="t_year" value="" style="width:50px"></td></tr> ';
+    s+= '<tr><td>Тираж</td><td><input type="edit" id="t_count" name="t_count"></td></tr> ';
+    s+= '<tr><td>Страниц</td><td><input type="edit" id="t_plength" name="t_plength" value="" style="width:50px"></td></tr> ';
   
     //nm=document.querySelector('[itemprop=isbn]').textContent;
     s+= '<tr><td>ISBN</td><td><input type="edit" id="t_isbn" name="t_isbn" value="" style="width:100%"></td></tr> ';
   
     //nm=document.querySelector('[itemprop=bookFormat]').textContent;
-    s+= '<tr><td>РўРёРї РѕР±Р»РѕР¶РєРё</td><td><input type="edit" id="t_covertype" name="t_covertype" value="" style="width:100%"></td></tr> ';
-    s+= '<tr><td>Р¤РѕСЂРјР°С‚</td><td><input type="edit" id="t_format" name="t_format"></td></tr> ';
+    s+= '<tr><td>Тип обложки</td><td><input type="edit" id="t_covertype" name="t_covertype" value="" style="width:100%"></td></tr> ';
+    s+= '<tr><td>Формат</td><td><input type="edit" id="t_format" name="t_format"></td></tr> ';
   
-    s+= '<tr><td>РћРїРёСЃР°РЅРёРµ</td><td><textarea id="t_descript" name="t_descript" style="width:100%;height:40px"></textarea></td></tr> ';
-    s+= '<tr><td>РЎРѕРґРµСЂР¶Р°РЅРёРµ</td><td><textarea id="t_content" name="t_content" style="width:100%;height:80px"></textarea></td></tr> ';
-    s+= '<tr><td>РџСЂРёРјРµС‡Р°РЅРёРµ</td><td><textarea id="t_note" name="t_note" style="width:100%;height:40px"></textarea></td></tr> ';
-    s+= '<tr><td></td><td align="center"><label><input id="t_green" name="t_green" type="checkbox">РРЅС„РѕСЂРјР°С†РёСЏ РІРЅРµСЃРµРЅР° СЃ Р±СѓРјР°Р¶РЅРѕР№ РєРЅРёРіРё, РїРѕР»РЅР°СЏ Рё РґРѕСЃС‚РѕРІРµСЂРЅР°СЏ (РјРѕР¶РЅРѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»С‘РЅСѓСЋ СЂР°РјРєСѓ)</label>';
+    s+= '<tr><td>Описание</td><td><textarea id="t_descript" name="t_descript" style="width:100%;height:40px"></textarea></td></tr> ';
+    s+= '<tr><td>Содержание</td><td><textarea id="t_content" name="t_content" style="width:100%;height:80px"></textarea></td></tr> ';
+    s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:40px"></textarea></td></tr> ';
+    s+= '<tr><td></td><td align="center"><label><input id="t_green" name="t_green" type="checkbox">Информация внесена с бумажной книги, полная и достоверная (можно ставить зелёную рамку)</label>';
     }break;
     case 2: {
-  //    РѕР·РµР»РµРЅРёС‚СЊ
-     s+= '<tr><td></td><td align="center"><label><input id="t_green" name="t_green" type="checkbox">РџРѕРґС‚РІРµСЂР¶РґР°СЋ: СЃРІРµСЂРµРЅРѕ СЃ Р±СѓРјР°Р¶РЅРѕР№ РєРЅРёРіРѕР№ - РёРЅС„РѕСЂРјР°С†РёСЏ РІ РєР°СЂС‚РѕС‡РєРµ РёР·РґР°РЅРёСЏ РїРѕР»РЅР°СЏ Рё РґРѕСЃС‚РѕРІРµСЂРЅР°СЏ, РјРѕР¶РЅРѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»С‘РЅСѓСЋ СЂР°РјРєСѓ</label>';	
-	 s+= '<tr><td>РџСЂРёРјРµС‡Р°РЅРёРµ</td><td><textarea id="t_note" name="t_note" style="width:100%;height:40px"></textarea></td></tr> ';
+  //    озеленить
+  if (ur.indexOf('edition')==-1) {f=false; break; }
+     s+= '<tr><td></td><td align="center"><label><input id="t_green" name="t_green" type="checkbox">Подтверждаю: сверено с бумажной книгой - информация в карточке издания полная и достоверная, можно ставить зелёную рамку</label>';	
+	 s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:40px"></textarea></td></tr> ';
 }    break;
     case 3: {
-   //   РґРѕР±Р°РІРёС‚СЊ РІРѕСЂРє
-	s+= '<tr><td>Р“РѕРґ</td><td><input type="edit" id="t_year" name="t_year"></td></tr> ';
-	s+= '<tr><td>РќР°Р·РІР°РЅРёРµ</td> <td width="100%"><input type="edit" id="t_name" name="t_name" style="width:100%"></td></tr>';
-	s+= '<tr><td>РџСЂРёРјРµС‡Р°РЅРёРµ</td><td><textarea id="t_note" name="t_note" style="width:100%;height:30px"></textarea></td></tr> ';
-	s+= '<tr><td>РЎСЃС‹Р»РєР° РЅР° РёСЃС‚РѕС‡РЅРёРє</td> <td width="100%"><input type="edit" id="t_url" name="t_url" style="width:100%"></td></tr>';
+   //   добавить ворк
+  if (ur.indexOf('autor')==-1) {f=false; break; }
+	s+= '<tr><td>Год</td><td><input type="edit" id="t_year" name="t_year"></td></tr> ';
+	s+= '<tr><td>Название</td> <td width="100%"><input type="edit" id="t_name" name="t_name" style="width:100%"></td></tr>';
+	s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:30px"></textarea></td></tr> ';
+	s+= '<tr><td>Ссылка на источник</td> <td width="100%"><input type="edit" id="t_url" name="t_url" style="width:100%"></td></tr>';
 }    break;
     case 4: {
-   //   РёРЅС‚РµСЂРµСЃРЅС‹Р№ С„Р°РєС‚
-    s+= '<tr><td>РРЅС‚РµСЂРµСЃРЅС‹Р№ С„Р°РєС‚</td><td><textarea id="t_content" name="t_content" style="width:100%;height:80px"></textarea></td></tr> ';
-	s+= '<tr><td>РџСЂРёРјРµС‡Р°РЅРёРµ</td><td><textarea id="t_note" name="t_note" style="width:100%;height:30px"></textarea></td></tr> ';
-	s+='<tr><td>РЎСЃС‹Р»РєР° РЅР° РёСЃС‚РѕС‡РЅРёРє</td> <td width="100%"><input type="edit" id="t_url" name="t_url" style="width:100%"></td></tr>';
+   //   интересный факт
+    s+= '<tr><td>Интересный факт</td><td><textarea id="t_content" name="t_content" style="width:100%;height:80px"></textarea></td></tr> ';
+	s+= '<tr><td>Примечание</td><td><textarea id="t_note" name="t_note" style="width:100%;height:30px"></textarea></td></tr> ';
+	s+='<tr><td>Ссылка на источник</td> <td width="100%"><input type="edit" id="t_url" name="t_url" style="width:100%"></td></tr>';
 }    break;
   }
-  s+= '<tr valign="top" align="left"><td>РџСЂРёРєСЂРµРїРёС‚СЊ С„Р°Р№Р»</td>\
+  s+= '<tr valign="top" align="left"><td>Прикрепить файл</td>\
       <td width="100%"><input name="tickets_file" type="file" style="border:1px solid black;width:100%" value="">\
-      &nbsp;<font size="-2" color="gray">(РЅРµСЃРєРѕР»СЊРєРѕ С„Р°Р№Р»РѕРІ РјРѕР¶РЅРѕ РїРѕСЃР»Р°С‚СЊ РѕРґРЅРёРј Р°СЂС…РёРІРѕРј)</font></td></tr>\
+      &nbsp;<font size="-2" color="gray">(несколько файлов можно послать одним архивом)</font></td></tr>\
       </td> </tr>\
       <tr align="center"> <td colspan="2">\
-      <input type="submit" style="cursor:pointer" onclick="return ticketsSubmit();" style="width:144px" value="РѕС‚РїСЂР°РІРёС‚СЊ Р·Р°СЏРІРєСѓ">\
-      <input type="button" style="cursor:pointer" value="РѕС‚РјРµРЅР°" onclick="return ticketsToggle()">\
+      <input type="submit" style="cursor:pointer" onclick="return ticketsSubmit();" style="width:144px" value="отправить заявку">\
+      <input type="button" style="cursor:pointer" value="отмена" onclick="return ticketsToggle()">\
       </td></tr></table>';
     
   if (f) {
@@ -134,7 +137,7 @@ function ticketsSubmit()
 {
    if (document.getElementById("tickets_name").value.length<1)
   {
-    alert("РЈРєР°Р¶РёС‚Рµ С‚РµРјСѓ Р·Р°СЏРІРєРё!");
+    alert("Укажите тему заявки!");
     return false
   }
   
@@ -147,37 +150,37 @@ function ticketsSubmit()
 	s=document.getElementById("tickets_txt").value;
   } break;      
   case 1: {
-	s='РќР°Р·РІР°РЅРёРµ: '+document.getElementById("t_name").value+ '\n\
-РђРІС‚РѕСЂ: '+document.getElementById("t_autors").value+ '\n\
-РЇР·С‹Рє: '+document.getElementById("t_language").value+ '\n\
-РР·РґР°С‚РµР»СЊСЃС‚РІРѕ: '+document.getElementById("t_publisher").value+ '\n\
-РЎРµСЂРёСЏ: '+document.getElementById("t_series").value+ '\n\
-Р“РѕРґ: '+document.getElementById("t_year").value+ '\n\
-РўРёСЂР°Р¶: '+document.getElementById("t_count").value+ '\n\
+	s='Название: '+document.getElementById("t_name").value+ '\n\
+Автор: '+document.getElementById("t_autors").value+ '\n\
+Язык: '+document.getElementById("t_language").value+ '\n\
+Издательство: '+document.getElementById("t_publisher").value+ '\n\
+Серия: '+document.getElementById("t_series").value+ '\n\
+Год: '+document.getElementById("t_year").value+ '\n\
+Тираж: '+document.getElementById("t_count").value+ '\n\
 ISBN: '+document.getElementById("t_isbn").value+ '\n\
-РўРёРї РѕР±Р»РѕР¶РєРё: '+document.getElementById("t_covertype").value+ '\n\
-Р¤РѕСЂРјР°С‚: '+document.getElementById("t_format").value+ '\n\
-РћРїРёСЃР°РЅРёРµ: '+document.getElementById("t_descript").value+ '\n\
-РЎРѕРґРµСЂР¶Р°РЅРёРµ: '+document.getElementById("t_content").value+ '\n\
-РџСЂРёРјРµС‡Р°РЅРёРµ: '+document.getElementById("t_note").value;
-	if (document.getElementById("t_green").checked) {s+='РРЅС„РѕСЂРјР°С†РёСЏ РІРЅРµСЃРµРЅР° СЃ Р±СѓРјР°Р¶РЅРѕР№ РєРЅРёРіРё, РїРѕР»РЅР°СЏ Рё РґРѕСЃС‚РѕРІРµСЂРЅР°СЏ (РјРѕР¶РЅРѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»С‘РЅСѓСЋ СЂР°РјРєСѓ)'}
+Тип обложки: '+document.getElementById("t_covertype").value+ '\n\
+Формат: '+document.getElementById("t_format").value+ '\n\
+Описание: '+document.getElementById("t_descript").value+ '\n\
+Содержание: '+document.getElementById("t_content").value+ '\n\
+Примечание: '+document.getElementById("t_note").value;
+	if (document.getElementById("t_green").checked) {s+='Информация внесена с бумажной книги, полная и достоверная (можно ставить зелёную рамку)'}
   } break;
   case 2: {
-	s='РџСЂРёРјРµС‡Р°РЅРёРµ: '+document.getElementById("t_note").value;
-	if (document.getElementById("t_green").checked) {s+='РџРѕРґС‚РІРµСЂР¶РґР°СЋ: СЃРІРµСЂРµРЅРѕ СЃ Р±СѓРјР°Р¶РЅРѕР№ РєРЅРёРіРѕР№ - РёРЅС„РѕСЂРјР°С†РёСЏ РІ РєР°СЂС‚РѕС‡РєРµ РёР·РґР°РЅРёСЏ РїРѕР»РЅР°СЏ Рё РґРѕСЃС‚РѕРІРµСЂРЅР°СЏ, РјРѕР¶РЅРѕ СЃС‚Р°РІРёС‚СЊ Р·РµР»С‘РЅСѓСЋ СЂР°РјРєСѓ'}
+	s='Примечание: '+document.getElementById("t_note").value;
+	if (document.getElementById("t_green").checked) {s+='Подтверждаю: сверено с бумажной книгой - информация в карточке издания полная и достоверная, можно ставить зелёную рамку'}
   } break;
 
   case 3: {
-	s='Р“РѕРґ: '+document.getElementById("t_year").value+'\n\
-РќР°Р·РІР°РЅРёРµ: '+document.getElementById("t_name").value+'\n\
-РџСЂРёРјРµС‡Р°РЅРёРµ: '+document.getElementById("t_note").value+'\n\
-РСЃС‚РѕС‡РЅРёРє: '+document.getElementById("t_url").value;
+	s='Год: '+document.getElementById("t_year").value+'\n\
+Название: '+document.getElementById("t_name").value+'\n\
+Примечание: '+document.getElementById("t_note").value+'\n\
+Источник: '+document.getElementById("t_url").value;
 
   } break;
   case 4: {
-	s='РРЅС‚РµСЂРµСЃРЅС‹Р№ С„Р°РєС‚: '+document.getElementById("t_content").value+'\n\
-РџСЂРёРјРµС‡Р°РЅРёРµ: '+document.getElementById("t_note").value+'\n\
-РСЃС‚РѕС‡РЅРёРє: '+document.getElementById("t_url").value;
+	s='Интересный факт: '+document.getElementById("t_content").value+'\n\
+Примечание: '+document.getElementById("t_note").value+'\n\
+Источник: '+document.getElementById("t_url").value;
 
   } break;
   }
@@ -185,7 +188,7 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
   
   if (document.getElementById("tickets_text").value.length<1)
   {
-    alert("РћРїРёС€РёС‚Рµ Р·Р°СЏРІРєСѓ!");
+    alert("Опишите заявку!");
     return false
   }
   else
@@ -194,6 +197,5 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
     ticketsform.submit();
   
     this.disabled=true;
-    return false
-  }
+   }
 }
