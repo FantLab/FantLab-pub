@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+/* FL tickets.js v2.1.1
+=======
 /* FL tickets.js v2.1
+>>>>>>> upstream/master
  * https://github.com/parserpro/fantlab_pub/blob/master/public/js/tickets.js
  * Live demo : https://jsbin.com/sumudah/
  * ========================================================================
@@ -84,7 +88,11 @@ function select_ttype()
     case 1: {
       if (ur.indexOf('edition')==-1 & ur.indexOf('autor')==-1 & ur.indexOf('work')==-1 & ur.indexOf('series')==-1) {
         f=false; 
+<<<<<<< HEAD
+  		s='<div style="color: red;"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страниц издания, произведения автора или серии\
+=======
   		s='<div style="color: red;"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страниц издания, произведения, автора или серии\
+>>>>>>> upstream/master
   	    	любого из произведений книги!</big><BR>(Если на сайте нет даже автора - воспользуйтесь общей формой заявки)<div><BR><BR>';
       }
       else {
