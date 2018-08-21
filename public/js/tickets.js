@@ -149,7 +149,7 @@ function select_ttype()
 
     // озеленить
     case 4: {   
-      if (!ur.indexOf('edition')==-1) {
+      if (ur.indexOf('edition')==-1) {
         f = false; 
         s = '<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы издания!</big><div><BR><BR>';
       }
@@ -164,7 +164,7 @@ function select_ttype()
 
     // добавить ворк
     case 1: {
-      if (!ur.indexOf('autor')==-1 & ur.indexOf('series')==-1) {
+      if (ur.indexOf('autor')==-1 & ur.indexOf('series')==-1) {
         f=false; 
       s='<div style="color: red;"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы автора или цикла!</big><div><BR><BR>';
       break; 
