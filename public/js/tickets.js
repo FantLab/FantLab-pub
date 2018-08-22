@@ -149,7 +149,7 @@ function select_ttype()
 
     // озеленить
     case 4: {   
-      if (!ur.indexOf('edition')==-1) {
+      if (ur.indexOf('edition')==-1) {
         f = false; 
         s = '<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы издания!</big><div><BR><BR>';
       }
@@ -164,18 +164,18 @@ function select_ttype()
 
     // добавить ворк
     case 1: {
-      if (!ur.indexOf('autor')==-1 & ur.indexOf('series')==-1) {
+      if (ur.indexOf('autor')==-1 & ur.indexOf('series')==-1) {
         f=false; 
-      s='<div style="color: red;"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы автора или цикла!</big><div><BR><BR>';
-      break; 
+        s='<div style="color: red;"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы автора или цикла!</big><div><BR><BR>';
+        break; 
       }
       else {
-      s+= '<div class="form-group"><label for="t_name">Название</label><input type="text" id="t_name" name="t_name"></div>';
-      s+= '<div class="form-group"><label for="t_year">Год</label><input type="text" id="t_year" name="t_year" style="width:50px"></div>';
-      s+= '<div class="form-group"><label for="t_worktype">Форма произв-я</label><input type="text" id="t_worktype" name="t_worktype" style="width:140px"></div>';
-      s+= '<div class="form-group"><label for="t_note">Примечание</label>\
+        s+= '<div class="form-group"><label for="t_name">Название</label><input type="text" id="t_name" name="t_name"></div>';
+        s+= '<div class="form-group"><label for="t_year">Год</label><input type="text" id="t_year" name="t_year" style="width:50px"></div>';
+        s+= '<div class="form-group"><label for="t_worktype">Форма произв-я</label><input type="text" id="t_worktype" name="t_worktype" style="width:140px"></div>';
+        s+= '<div class="form-group"><label for="t_note">Примечание</label>\
             <textarea id="t_note" name="t_note" rows=4></textarea></div>';
-      s+= '<div class="form-group"><label for="t_url">Ссылка на источник</label>\
+        s+= '<div class="form-group"><label for="t_url">Ссылка на источник</label>\
             <input type="text" id="t_url" name="t_url"><addr data-toggle="tooltip" data-container="body" title="крайне желательна ссылка на источник"></addr></div>';
       }
     } break;
