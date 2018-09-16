@@ -1,4 +1,4 @@
-/* FL tickets.js v2.2
+/* FL tickets.js v2.3
  * https://github.com/parserpro/fantlab_pub/blob/master/public/js/tickets.js
  * Live demo : https://jsbin.com/sumudah/
  * ========================================================================
@@ -37,6 +37,7 @@ function ticketsToggle()
       <input type="hidden" name="tickets_add_new" value="yes">\
       <input type="hidden" name="tickets_old_action" value="show">\
       <input type="hidden" id="tickets_text" name="tickets_text">\
+      <input type="hidden" id="data_json" name="data_json">\
       </form>  </div>';
           
     frm.innerHTML = s;
@@ -81,10 +82,10 @@ function select_ttype()
 
     // добавить издание
      case 3: {
-      if (!ur.indexOf('edition')==-1 & ur.indexOf('autor')==-1 & ur.indexOf('work')==-1 & ur.indexOf('series')==-1) {
+      if (ur.indexOf('edition')==-1 & ur.indexOf('autor')==-1 & ur.indexOf('work')==-1 & ur.indexOf('series')==-1) {
         f=false; 
       s='<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь<BR>со страниц издания, произведения, автора или серии\
-          любого из произведений книги!</big><BR>(Если на сайте нет даже автора - воспользуйтесь общей формой заявки)<div><BR><BR>';
+          любого из произведений книги!</big><BR>(Если на сайте нет даже автора - воспользуйтесь общей формой заявки)</div><BR><BR>';
       }
       else {
         s+= '<div class="form-group"><label for="t_name">Название</label>';
@@ -132,7 +133,7 @@ function select_ttype()
   
         s+= '<div class="form-group"><label for="t_descript">Описание</label>\
              <textarea id="t_descript" name="t_descript" \
-             rows=4></textarea><addr data-toggle="tooltip" data-container="body" title="сюда пишем базовую информацию,\
+             rows=4></textarea><addr data-toggle="tooltip" data-container="body" title="сюда пишем базовую информацию, \
 что перед нами за книга, типа: &quot;Сборник избранных произведений автора&quot; \
 и ОБЯЗАТЕЛЬНО здесь же указываем художников книги, отдельно, если указано, - художника обложки; иначе ПИШЕМ - \
 &quot;художник не указан&quot;"></addr></div>';
@@ -151,7 +152,7 @@ function select_ttype()
     case 4: {   
       if (ur.indexOf('edition')==-1) {
         f = false; 
-        s = '<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы издания!</big><div><BR><BR>';
+        s = '<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы издания!</big></div><BR><BR>';
       }
       else {    
         s+= '<div class="div_green"><label><input id="t_green" name="t_green" type="checkbox" onchange="set_stop();">\
@@ -166,7 +167,7 @@ function select_ttype()
     case 1: {
       if (ur.indexOf('autor')==-1 & ur.indexOf('series')==-1) {
         f=false; 
-        s='<div style="color: red;"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы автора или цикла!</big><div><BR><BR>';
+        s='<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь <BR>со страницы автора или цикла!</big></div><BR><BR>';
         break; 
       }
       else {
@@ -234,7 +235,8 @@ function ticketsSubmit()
   
   var ttype=document.getElementById("tickets_type"),
       index = ttype.selectedIndex,
-      s='Тип заявки: '+ document.getElementById("tickets_type").value+'\n\n';
+      s='Тип заявки: '+ document.getElementById("tickets_type").value+'\n\n',
+      s_json='{"Type": '+index+',\n';
   
   switch(index)
   {
@@ -257,6 +259,23 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
 Описание: '+document.getElementById("t_descript").value+ '\n\n\
 Содержание: '+document.getElementById("t_content").value+ '\n\n\
 Примечание: '+document.getElementById("t_note").value+ '\n\n';
+      
+          s_json+='"Name": '+document.getElementById("t_name").value+ ',\n\
+"Autors": '+document.getElementById("t_autors").value+ ',\n\
+"Language": '+document.getElementById("t_language").value+ ',\n\
+"Publisher": '+document.getElementById("t_publisher").value+ ',\n\
+"Series": '+document.getElementById("t_series").value+ ',\n\
+"Year": '+document.getElementById("t_year").value+ ',\n\
+"Count": '+document.getElementById("t_count").value+ ',\n\
+"Pages": '+document.getElementById("t_plength").value+ ',\n\
+"ISBN": '+document.getElementById("t_isbn").value+ ',\n\
+"Covertype": '+document.getElementById("t_covertype").value+ ',\n\
+"Format": '+document.getElementById("t_format").value+ ',\n\
+"Descript": '+document.getElementById("t_descript").value+ ',\n\
+"Content": '+document.getElementById("t_content").value+ ',\n\
+"Note": '+document.getElementById("t_note").value+ ',\n';
+   
+      
     if (document.getElementById("t_green").checked) {s+='Информация внесена с бумажной книги, полная и достоверная (можно ставить зелёную рамку)'}
     } break;
 
@@ -280,8 +299,12 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
 
     } break;
   }
-  document.getElementById("tickets_text").value=s;  
+  document.getElementById("tickets_text").value=s; 
+  s_json+='}';
   
+  s_json=JSON.stringify(s_json);
+  document.getElementById("data_json").value=s_json;
+      
   if (document.getElementById("tickets_text").value.length<1)
   {
     alert("Опишите заявку!");
@@ -290,7 +313,7 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
   else
   {
     ticketsform.submit();
+        
     this.disabled=true;
    }
 }
-
