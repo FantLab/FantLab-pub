@@ -1,0 +1,61 @@
+﻿.wrapper {
+    min-width: 720px;
+}
+
+
+/* css header - шапки сайта дисктопная */
+.navbar-tog {
+	display: none;
+}
+
+.header__picture {
+	width: 127px;
+	height: 100px;
+	background: url("//fantlab.ru/img/sp_bukashka.gif") center center no-repeat;
+    background-position: 0px 0px;
+	float: left;
+	margin-left: 5%;
+	margin-right: 5%;
+}
+
+.header__title {
+	float: left;
+	color: #c45e24;
+	font-size: large; /*20px;*/
+	font-weight: 700;
+	padding-left: 20px;
+	line-height: 25px;
+	padding-top: 25px;
+	background: url("//fantlab.ru/img/sp_bukashka.gif") left center no-repeat;
+    background-position: 0px -125px;
+	margin-right: 7%;
+}
+
+.header__title span {
+	color: #000;
+}
+
+.search {
+}
+
+.search__picture {
+  float:left;
+  padding-top: 0px;
+  width: 56px;
+  text-align: right;
+  margin-top: -15px;
+}
+.search__picture div {
+  width: 55px;
+  height: 72px;
+}
+
+
+
+/* на планшетах убираем лишнюю букашку в шапке */
+@media screen and (max-width: 840px) {
+    .search__picture {
+        display:none;
+    }
+}
+

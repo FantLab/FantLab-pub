@@ -1,0 +1,7 @@
+﻿OLD                 NEW
+
+ASIDE + user-reg    header__login
+
+main-container      content (и в нем container)
+
+

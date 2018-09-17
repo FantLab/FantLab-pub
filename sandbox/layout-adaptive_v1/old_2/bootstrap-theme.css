@@ -1,0 +1,232 @@
+.input-group-xs > .form-control,
+.input-group-xs > .input-group-addon,
+.input-group-xs > .input-group-btn > .btn {
+  height: 26px;
+  padding: 3px 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+}
+
+.form-control {
+  -webkit-transition: none;
+  transition: none;
+}
+
+.form-control:hover {
+  border-color: #3178A8;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(49, 120, 168, .6);
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(49, 120, 168, .6);
+}
+
+.btn-primary {
+  background-color: #3178A8;
+}
+
+.btn-primary:hover {
+  background-color: #265B7F;
+}
+
+/* Tables
+---------------------------------------------*/
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+  max-width: 100%;
+  background-color: transparent;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+  padding: 8px;
+  line-height: 1.42857143;
+  vertical-align: top;
+  border-top: 1px solid #ddd;
+}
+
+.table > thead > tr > th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #ddd;
+}
+
+.table > caption + thead > tr:first-child > th,
+.table > colgroup + thead > tr:first-child > th,
+.table > thead:first-child > tr:first-child > th,
+.table > caption + thead > tr:first-child > td,
+.table > colgroup + thead > tr:first-child > td,
+.table > thead:first-child > tr:first-child > td {
+  border-top: 0;
+}
+
+.table > tbody + tbody {
+  border-top: 2px solid #ddd;
+}
+
+.table .table {
+  background-color: #fff;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f9f9f9;
+}
+
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th {
+  background-color: #f5f5f5;
+}
+
+.tablesorter .tablesorter-header {
+  background-image: url(data:image/gif;base64,R0lGODlhFQAJAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAkAAAIXjI+AywnaYnhUMoqt3gZXPmVg94yJVQAAOw==);
+  background-repeat: no-repeat;
+  background-position: center right;
+  padding: 4px 18px 4px 4px;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.tablesorter .tablesorter-headerAsc {
+  background-color: #9fbfdf;
+  background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+}
+
+.tablesorter .tablesorter-headerDesc {
+  background-color: #8cb3d9;
+  background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+}
+
+.tablesorter thead .sorter-false {
+  background-image: none;
+  cursor: default;
+  padding: 4px;
+}
+
+/* forms
+---------------------------------------------*/
+input[type="file"] {
+  display: inline-block;
+}
+
+.bootstrap input[type="file"] {
+  display: block;
+}
+
+label {
+  display: inherit;
+  margin-bottom: inherit;
+  font-weight: inherit;
+}
+
+.bootstrap label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+
+.form-horizontal-fixed .form-group {
+  margin-bottom: 2px;
+}
+
+.form-horizontal-fixed .form-group > label {
+  float: left;
+  width: 160px;
+  margin-top: 10px;
+  font-weight: normal;
+  color: black;
+}
+
+.form-horizontal-fixed .form-group.form-file > label {
+  margin-top: 3px;
+}
+
+.form-horizontal-fixed .form-group > div {
+  float: left;
+}
+
+.form-horizontal-fixed .form-group > span {
+  float: left;
+  margin-top: 7px;
+  margin-left: 10px;
+  color: gray;
+}
+
+.form-horizontal-fixed .form-group:before,
+.form-horizontal-fixed .form-group:after {
+  display: table;
+  content: " ";
+}
+
+.form-horizontal-fixed .form-group:after {
+  clear: both;
+}
+
+.form-horizontal-fixed .form-group .form-control {
+  padding: 2px 4px;
+  color: black;
+}
+
+.form-horizontal-fixed .form-group input.form-control,
+.form-horizontal-fixed .form-group select.form-control {
+  height: 26px;
+  font-size: 12px;
+}
+
+.form-horizontal-fixed .form-group textarea.form-control {
+  font-size: 8pt;
+}
+
+.form-horizontal-fixed .form-group .textarea-large {
+  overflow: hidden;
+  float: none;
+}
+
+.form-horizontal-fixed .form-group .textarea-large textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.form-horizontal-fixed .form-group .checkbox label {
+  font-size: 12px;
+  -moz-user-select: moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.form-horizontal-fixed .form-group .checkbox input[type="checkbox"] {
+  margin-top: 2px;
+}
+
+.form-horizontal-fixed .form-aligned > div {
+  float: right;
+}
+
+.form-horizontal-fixed .form-aligned > p {
+  float: right;
+  margin-top: 8px;
+  margin-bottom: 0;
+  margin-right: 10px;
+}
+
+/* Clearfix for IE6-7
+---------------------------------------------*/
+.clearfix {
+  *zoom: 1;
+}
+
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.clearfix:after {
+  clear: both;
+}
