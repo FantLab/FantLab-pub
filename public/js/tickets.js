@@ -38,6 +38,7 @@ function ticketsToggle()
       <input type="hidden" name="tickets_old_action" value="show">\
       <input type="hidden" id="tickets_text" name="tickets_text">\
       <input type="hidden" id="data_json" name="data_json">\
+      <input type="hidden" id="data_json_type" name="data_json_type">\
       </form>  </div>';
           
     frm.innerHTML = s;
@@ -132,8 +133,8 @@ function select_ttype()
              <input type="text" id="t_format" name="t_format" style="width:140px"><addr data-toggle="tooltip" data-container="body" title="в стиле: 84x108\/32"></addr></div>';
   
         s+= '<div class="form-group"><label for="t_descript">Описание</label>\
-             <textarea id="t_descript" name="t_descript" \
-             rows=4></textarea><addr data-toggle="tooltip" data-container="body" title="сюда пишем базовую информацию, \
+             <textarea id="t_descript" name="t_descript" rows=4></textarea>\
+             <addr data-toggle="tooltip" data-container="body" title="сюда пишем базовую информацию, \
 что перед нами за книга, типа: &quot;Сборник избранных произведений автора&quot; \
 и ОБЯЗАТЕЛЬНО здесь же указываем художников книги, отдельно, если указано, - художника обложки; иначе ПИШЕМ - \
 &quot;художник не указан&quot;"></addr></div>';
@@ -157,8 +158,8 @@ function select_ttype()
       else {    
         s+= '<div class="div_green"><label><input id="t_green" name="t_green" type="checkbox" onchange="set_stop();">\
             Подтверждаю: сверено с бумажной книгой - информация в карточке издания полная и достоверная, можно ставить зелёную рамку</label></div><br>'; 
-        s+= '<div class="form-group"><label for="t_note">Примечание</label><textarea id="t_note" name="t_note" rows=4>\
-              </textarea><addr data-toggle="tooltip" data-container="body" title="любая доп. информация, пожелания администратору или уточнения вида: &quot;всё верно, сверено по книге, \
+        s+= '<div class="form-group"><label for="t_note">Примечание</label><textarea id="t_note" name="t_note" rows=4></textarea>\
+             <addr data-toggle="tooltip" data-container="body" title="любая доп. информация, пожелания администратору или уточнения вида: &quot;всё верно, сверено по книге, \
 плюс дизайнер обложки (или любой другой параметр издания поменять или дополнить) - такой-то&quot;"></addr></div>';
       }
     } break;
@@ -183,8 +184,8 @@ function select_ttype()
 
     // интересный факт
     case 2: {
-      s+= '<div class="form-group"><label for="t_name">Интересный факт</label><textarea id="t_content" name="t_content" rows=6>\
-           </textarea><addr data-toggle="tooltip" data-container="body" title="Примечание, которое будет интересно широкому кругу читателей, из истории создания произведения, его героев, связь с реальностью и т.п."></addr></div>';
+      s+= '<div class="form-group"><label for="t_name">Интересный факт</label><textarea id="t_content" name="t_content" rows=6></textarea>\
+           <addr data-toggle="tooltip" data-container="body" title="Примечание, которое будет интересно широкому кругу читателей, из истории создания произведения, его героев, связь с реальностью и т.п."></addr></div>';
   
       s+= '<div class="form-group"><label for="t_name">Ссылка на источник</label>\
            <input type="text" id="t_url" name="t_url" <addr data-toggle="tooltip" data-container="body" title="для одобрения вашего &quot;факта&quot;, крайне желательно указать источник"></addr></div>';
@@ -236,12 +237,16 @@ function ticketsSubmit()
   var ttype=document.getElementById("tickets_type"),
       index = ttype.selectedIndex,
       s='Тип заявки: '+ document.getElementById("tickets_type").value+'\n\n',
-      s_json='{"Type": '+index+',\n';
+      s_json='{';  //"Type": '+index+',\n';
+      
   
   switch(index)
   {
     case 0: {
       s+=document.getElementById("tickets_txt").value;
+      
+      s_json+='"Txt": '+document.getElementById("tickets_txt").value;
+      document.getElementById("data_json_type").value='standart';
     } break;      
 
     case 3: {
@@ -260,27 +265,32 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
 Содержание: '+document.getElementById("t_content").value+ '\n\n\
 Примечание: '+document.getElementById("t_note").value+ '\n\n';
       
-          s_json+='"Name": '+document.getElementById("t_name").value+ ',\n\
-"Autors": '+document.getElementById("t_autors").value+ ',\n\
-"Language": '+document.getElementById("t_language").value+ ',\n\
-"Publisher": '+document.getElementById("t_publisher").value+ ',\n\
-"Series": '+document.getElementById("t_series").value+ ',\n\
-"Year": '+document.getElementById("t_year").value+ ',\n\
-"Count": '+document.getElementById("t_count").value+ ',\n\
-"Pages": '+document.getElementById("t_plength").value+ ',\n\
-"ISBN": '+document.getElementById("t_isbn").value+ ',\n\
-"Covertype": '+document.getElementById("t_covertype").value+ ',\n\
-"Format": '+document.getElementById("t_format").value+ ',\n\
-"Descript": '+document.getElementById("t_descript").value+ ',\n\
-"Content": '+document.getElementById("t_content").value+ ',\n\
-"Note": '+document.getElementById("t_note").value+ ',\n';
-   
+      s_json+='"Name": '+document.getElementById("t_name").value+
+',"Autors": '+document.getElementById("t_autors").value+
+',"Language": '+document.getElementById("t_language").value+
+',"Publisher": '+document.getElementById("t_publisher").value+
+',"Series": '+document.getElementById("t_series").value+
+',"Year": '+document.getElementById("t_year").value+
+',"Count": '+document.getElementById("t_count").value+
+',"Pages": '+document.getElementById("t_plength").value+
+',"ISBN": '+document.getElementById("t_isbn").value+
+',"Covertype": '+document.getElementById("t_covertype").value+
+',"Format": '+document.getElementById("t_format").value+
+',"Descript": '+document.getElementById("t_descript").value+
+',"Content": '+document.getElementById("t_content").value+
+',"Note": '+document.getElementById("t_note").value;
+
+      document.getElementById("data_json_type").value='edition_add';
       
     if (document.getElementById("t_green").checked) {s+='Информация внесена с бумажной книги, полная и достоверная (можно ставить зелёную рамку)'}
     } break;
 
     case 4: {
       s+='Примечание: '+document.getElementById("t_note").value+ '\n\n';
+      
+      s_json+='"Note": '+document.getElementById("t_note").value;
+      document.getElementById("data_json_type").value='edition_green';
+      
       if (document.getElementById("t_green").checked) {s+='Подтверждаю: сверено с бумажной книгой - информация в карточке издания полная и достоверная, можно ставить зелёную рамку'}
     } break;
 
@@ -290,30 +300,42 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
 Форма: '+document.getElementById("t_worktype").value+'\n\
 Примечание: '+document.getElementById("t_note").value+'\n\
 Источник: '+document.getElementById("t_url").value;
+      
+      s_json+='"Name": '+document.getElementById("t_name").value+
+',"Year": '+document.getElementById("t_year").value+
+',"Worktype": '+document.getElementById("t_worktype").value+
+',"Note": '+document.getElementById("t_note").value+
+',"Url": '+document.getElementById("t_url").value;
+      
+      document.getElementById("data_json_type").value='work_add';
+      
     } break;
 
-    case 2: {
+    case 2: { 
       s+='Интересный факт: '+document.getElementById("t_content").value+'\n\
-Примечание: '+document.getElementById("t_note").value+'\n\
 Источник: '+document.getElementById("t_url").value;
+      
+      s_json+='"Content": '+document.getElementById("t_content").value+ 
+',"Url": '+document.getElementById("t_url").value;
 
+      document.getElementById("data_json_type").value='work_fact';
     } break;
   }
   document.getElementById("tickets_text").value=s; 
   s_json+='}';
-  
-  s_json=JSON.stringify(s_json);
+  //s_json=JSON.stringify(s_json);
   document.getElementById("data_json").value=s_json;
-      
+  console.log(s_json);
+    
   if (document.getElementById("tickets_text").value.length<1)
   {
     alert("Опишите заявку!");
-    return false
+    return false;
   }
   else
   {
     ticketsform.submit();
-        
+    
     this.disabled=true;
    }
 }
