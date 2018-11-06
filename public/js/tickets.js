@@ -1,4 +1,4 @@
-/* FL tickets.js v2.3
+/* FL tickets.js v2.4
  * https://github.com/parserpro/fantlab_pub/blob/master/public/js/tickets.js
  * Live demo : https://jsbin.com/sumudah/
  * ========================================================================
@@ -83,66 +83,56 @@ function select_ttype()
 
     // добавить издание
      case 3: {
-      if (ur.indexOf('edition')==-1 & ur.indexOf('autor')==-1 & ur.indexOf('work')==-1 & ur.indexOf('series')==-1) {
+      if (!ur.indexOf('edition')==-1 & ur.indexOf('autor')==-1 & ur.indexOf('work')==-1 & ur.indexOf('series')==-1) {
         f=false; 
       s='<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь<BR>со страниц издания, произведения, автора или серии\
           любого из произведений книги!</big><BR>(Если на сайте нет даже автора - воспользуйтесь общей формой заявки)</div><BR><BR>';
       }
-      else {
-        s+= '<div class="form-group"><label for="t_name">Название</label>';
-        // nm=document.querySelector('[itemprop=name]').textContent;
-        s+= '<input type="text" id="t_name" name="t_name" value="" required><addr data-toggle="tooltip" data-container="body" title="строго как в книге!"></addr></div>';
-        // nm=document.querySelector('[itemprop=author]').textContent;
-        s+= '<div class="form-group"><label for="t_autors">Автор</label>\
-             <input type="text" id="t_autors" name="t_autors" value=""><addr data-toggle="tooltip" data-container="body" title="можно несколько через запятую, строго как в книге"></addr></div>';
-    
-        s+= '<div class="form-group"><label for="t_language">Язык</label>\
-             <input type="text" id="t_language" name="t_language" value="русский" style="width:140px"></div>';
-      
-        //nm=document.querySelector('[itemprop=publisher]').textContent;
-        s+= '<div class="form-group"><label for="t_publisher">Издательство</label>\
-             <input type="text" id="t_publisher" name="t_publisher" value=""><addr data-toggle="tooltip" data-container="body" title="можно несколько через запятую, плюс город"></addr></div>';
-    
-        s+= '<div class="form-group"><label for="t_series">Серия</label>\
-             <input type="text" id="t_series" name="t_series"><addr data-toggle="tooltip" data-container="body" title="плюс номер тома если есть"></addr></div>';
-    
-        //nm=document.querySelector('[itemprop=copyrightYear]').textContent;
-        s+= '<div class="form-group"><label for="t_year">Год</label>\
-             <input type="text" id="t_year" name="t_year" value="" style="width:50px"></div>';
-        s+= '<div class="form-group"><label for="t_count">Тираж</label>\
-            <input type="text" id="t_count" name="t_count" style="width:50px"></div>';
-        s+= '<div class="form-group"><label for="t_plength">Страниц</label>\
-            <input type="text" id="t_plength" name="t_plength" value="" style="width:50px"></div>';
-  
-        //nm=document.querySelector('[itemprop=isbn]').textContent;
-        s+= '<div class="form-group"><label for="t_isbn">ISBN</label>\
-             <input type="text" id="t_isbn" name="t_isbn" value=""><addr data-toggle="tooltip" data-container="body" title="можно несколько через запятую"></addr></div>';
-  
-        //nm=document.querySelector('[itemprop=bookFormat]').textContent;
+      else { 
+        var nm=document.getElementById("name").textContent;
+        s+= '<div class="form-group"><label for="t_name">Название</label><input type="text" id="t_name" name="t_name" value="'+nm+
+            '" required><addr data-toggle="tooltip" data-container="body" title="строго как в книге!"></addr></div>';
+        s+= '<div class="form-group"><label for="t_autors">Автор</label><input type="text" id="t_autors" name="t_autors" value="'+GetTXT('autors')+
+             '"><addr data-toggle="tooltip" data-container="body" title="можно несколько через запятую, строго как в книге"></addr></div>';
+        s+= '<div class="form-group"><label for="t_language">Язык</label><input type="text" id="t_language" name="t_language" value="'+GetTXT('lang')+
+            '" style="width:140px"></div>';
+        s+= '<div class="form-group"><label for="t_publisher">Издательство</label><input type="text" id="t_publisher" name="t_publisher" value="'+GetTXT('publisher')+
+             '"><addr data-toggle="tooltip" data-container="body" title="можно несколько через запятую, плюс город"></addr></div>';
+        s+= '<div class="form-group"><label for="t_series">Серия</label><input type="text" id="t_series" name="t_series" value="'+GetTXT('series')+
+             '"><addr data-toggle="tooltip" data-container="body" title="плюс номер тома если есть"></addr></div>';
+        s+= '<div class="form-group"><label for="t_year">Год</label><input type="text" id="t_year" name="t_year" value="'+GetTXT('year')+
+             '" style="width:50px"></div>';
+        s+= '<div class="form-group"><label for="t_count">Тираж</label><input type="text" id="t_count" name="t_count" value="'+GetTXT('count')+
+            '"style="width:80px"></div>';
+        s+= '<div class="form-group"><label for="t_plength">Страниц</label><input type="text" id="t_plength" name="t_plength" value="'+GetTXT('pages')+
+            '" style="width:50px"></div>';
+        s+= '<div class="form-group"><label for="t_isbn">ISBN</label><input type="text" id="t_isbn" name="t_isbn" value="'+GetTXT('isbn')+
+             '"><addr data-toggle="tooltip" data-container="body" title="можно несколько через запятую"></addr></div>';
+        nm=GetTXT('covertype');
         s+= '<div class="form-group"><label for="t_covertype">Тип обложки</label>\
           <select id="t_covertype" name="t_covertype"> \
           <option>не известен</option>\
-          <option>мягкая</option>\
-          <option>твёрдая</option>\
-          <option>дутая</option>\
-          <option>кожаная</option>\
-          <option>интегральная</option>\
+          <option'; if (nm=='мягкая'){s+=' selected'} s+='>мягкая</option>\
+          <option'; if (nm=='твёрдая'){s+=' selected'} s+='>твёрдая</option>\
+          <option'; if (nm=='дутая'){s+=' selected'} s+='>дутая</option>\
+          <option'; if (nm=='кожаная'){s+=' selected'} s+='>кожаная</option>\
+          <option'; if (nm=='интегральная'){s+=' selected'} s+='>интегральная</option>\
         </select></div>';
 
-        s+= '<div class="form-group"><label for="t_format">Формат</label>\
-             <input type="text" id="t_format" name="t_format" style="width:140px"><addr data-toggle="tooltip" data-container="body" title="в стиле: 84x108\/32"></addr></div>';
+        s+= '<div class="form-group"><label for="t_format">Формат</label><input type="text" id="t_format" name="t_format" value="'+GetTXT('format')+
+            '"style="width:140px"><addr data-toggle="tooltip" data-container="body" title="в стиле: 84x108\/32"></addr></div>';
   
         s+= '<div class="form-group"><label for="t_descript">Описание</label>\
-             <textarea id="t_descript" name="t_descript" rows=4></textarea>\
+             <textarea id="t_descript" name="t_descript" rows=4>'+GetTXT('descript')+'</textarea>\
              <addr data-toggle="tooltip" data-container="body" title="сюда пишем базовую информацию, \
 что перед нами за книга, типа: &quot;Сборник избранных произведений автора&quot; \
 и ОБЯЗАТЕЛЬНО здесь же указываем художников книги, отдельно, если указано, - художника обложки; иначе ПИШЕМ - \
 &quot;художник не указан&quot;"></addr></div>';
         s+= '<div class="form-group"><label for="t_content">Содержание</label>\
-             <textarea id="t_content" name="t_content" rows=8></textarea><addr data-toggle="tooltip" data-container="body" title="здесь указываем отдельными строками, строго как в книге, название, тип (что это: рассказ, роман, сказка... - если в книге указано), \
+             <textarea id="t_content" name="t_content" rows=8>'+GetTXT('content')+'</textarea><addr data-toggle="tooltip" data-container="body" title="здесь указываем отдельными строками, строго как в книге, название, тип (что это: рассказ, роман, сказка... - если в книге указано), \
 переводчик и, для каждого произведения, страницы от и до, начиная со шмуцтитула, сверенные по книге, а не по содержанию"></addr></div>';
         s+= '<div class="form-group"><label for="t_note">Примечание</label>\
-             <textarea id="t_note" name="t_note" rows=4></textarea><addr data-toggle="tooltip" data-container="body" title="Здесь пишем любую доп. информацию, которая не подошла по формату полям выше, \
+             <textarea id="t_note" name="t_note" rows=4>'+GetTXT('notes')+'</textarea><addr data-toggle="tooltip" data-container="body" title="Здесь пишем любую доп. информацию, которая не подошла по формату полям выше, \
 плюс свои пожелания и замечания администратору, который будет обрабатывать заявку"></addr></div>';
         s+= '<div class="div_green"><label><input id="t_green" name="t_green" type="checkbox" onchange="set_stop();">\
              Информация внесена с бумажной книги, полная и достоверная (можно ставить зелёную рамку)</label></div><br>';
@@ -223,6 +213,13 @@ function set_stop()
     document.getElementById("t_plength").required = false;
     document.getElementById("t_content").required = false;
   }
+}
+
+function GetTXT(elm)
+{
+   var elem=document.getElementById(elm);
+        if (typeof elem !== 'undefined' && elem !== null) {return elem.textContent;}
+        else return '';
 }
 
 
@@ -323,7 +320,7 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
   }
   document.getElementById("tickets_text").value=s; 
   s_json+='}';
-  //s_json=JSON.stringify(s_json);
+
   document.getElementById("data_json").value=s_json;
   console.log(s_json);
     
