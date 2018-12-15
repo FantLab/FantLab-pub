@@ -89,7 +89,8 @@ function select_ttype()
           любого из произведений книги!</big><BR>(Если на сайте нет даже автора - воспользуйтесь общей формой заявки)</div><BR><BR>';
       }
       else { 
-        s+= '<div class="form-group"><label for="t_name">Название</label><input type="text" id="t_name" name="t_name" value="'+GetTXT('name')+
+        var nm=document.getElementById("name").textContent;
+        s+= '<div class="form-group"><label for="t_name">Название</label><input type="text" id="t_name" name="t_name" value="'+nm+
             '" required><addr data-toggle="tooltip" data-container="body" title="строго как в книге!"></addr></div>';
         s+= '<div class="form-group"><label for="t_autors">Автор</label><input type="text" id="t_autors" name="t_autors" value="'+GetTXT('autors')+
              '"><addr data-toggle="tooltip" data-container="body" title="можно несколько через запятую, строго как в книге"></addr></div>';
@@ -123,12 +124,12 @@ function select_ttype()
   
         s+= '<div class="form-group"><label for="t_descript">Описание</label>\
              <textarea id="t_descript" name="t_descript" rows=4>'+GetTXT('descript')+'</textarea>\
-<addr data-toggle="tooltip" data-container="body" title="сюда пишем базовую информацию, \
+             <addr data-toggle="tooltip" data-container="body" title="сюда пишем базовую информацию, \
 что перед нами за книга, типа: &quot;Сборник избранных произведений автора&quot; \
 и ОБЯЗАТЕЛЬНО здесь же указываем художников книги, отдельно, если указано, - художника обложки; иначе ПИШЕМ - \
 &quot;художник не указан&quot;"></addr></div>';
         s+= '<div class="form-group"><label for="t_content">Содержание</label>\
-             <textarea id="t_content" name="t_content" rows=8></textarea><addr data-toggle="tooltip" data-container="body" title="здесь указываем отдельными строками, строго как в книге, название, тип (что это: рассказ, роман, сказка... - если в книге указано), \
+             <textarea id="t_content" name="t_content" rows=8>'+GetTXT('content')+'</textarea><addr data-toggle="tooltip" data-container="body" title="здесь указываем отдельными строками, строго как в книге, название, тип (что это: рассказ, роман, сказка... - если в книге указано), \
 переводчик и, для каждого произведения, страницы от и до, начиная со шмуцтитула, сверенные по книге, а не по содержанию"></addr></div>';
         s+= '<div class="form-group"><label for="t_note">Примечание</label>\
              <textarea id="t_note" name="t_note" rows=4>'+GetTXT('notes')+'</textarea><addr data-toggle="tooltip" data-container="body" title="Здесь пишем любую доп. информацию, которая не подошла по формату полям выше, \
@@ -148,7 +149,7 @@ function select_ttype()
         s+= '<div class="div_green"><label><input id="t_green" name="t_green" type="checkbox" onchange="set_stop();">\
             Подтверждаю: сверено с бумажной книгой - информация в карточке издания полная и достоверная, можно ставить зелёную рамку</label></div><br>'; 
         s+= '<div class="form-group"><label for="t_note">Примечание</label><textarea id="t_note" name="t_note" rows=4></textarea>\
-<addr data-toggle="tooltip" data-container="body" title="любая доп. информация, пожелания администратору или уточнения вида: &quot;всё верно, сверено по книге, \
+             <addr data-toggle="tooltip" data-container="body" title="любая доп. информация, пожелания администратору или уточнения вида: &quot;всё верно, сверено по книге, \
 плюс дизайнер обложки (или любой другой параметр издания поменять или дополнить) - такой-то&quot;"></addr></div>';
       }
     } break;
@@ -174,8 +175,8 @@ function select_ttype()
     // интересный факт
     case 2: {
       s+= '<div class="form-group"><label for="t_name">Интересный факт</label><textarea id="t_content" name="t_content" rows=6></textarea>\
-<addr data-toggle="tooltip" data-container="body" title="Примечание, которое будет интересно широкому кругу читателей, из истории создания произведения, его героев, связь с реальностью и т.п."></addr></div>';
-  
+           <addr data-toggle="tooltip" data-container="body" title="Примечание, которое будет интересно широкому кругу читателей, из истории создания произведения, его героев, связь с реальностью и т.п."></addr></div>';
+ 
       s+= '<div class="form-group"><label for="t_name">Ссылка на источник</label>\
            <input type="text" id="t_url" name="t_url"><addr data-toggle="tooltip" data-container="body" title="для одобрения вашего &quot;факта&quot;, крайне желательно указать источник"></addr></div>';
     } break;
@@ -233,8 +234,8 @@ function ticketsSubmit()
   var ttype=document.getElementById("tickets_type"),
       index = ttype.selectedIndex,
       s='Тип заявки: '+ document.getElementById("tickets_type").value+'\n\n',
-      s_json='{';
-      
+      s_json='{';  //"Type": '+index+',\n';
+     
   
   switch(index)
   {
@@ -332,7 +333,7 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
   {
     ticketsform.submit();
     // return false; 
-    
+   
     this.disabled=true;
    }
 }
