@@ -26,7 +26,7 @@ function ticketsToggle()
       <option>Общая заявка</option>\
       <optgroup label="для произведений">\
       <option>Добавить произведение</option>\
-      <option>Прислать интересный факт (для примечания)</option>\
+      <option>Интересный факт (для примечания)</option>\
       </optgroup>\
       <optgroup label="для изданий">\
       <option>Добавить / Дополнить издание</option>\
@@ -77,13 +77,13 @@ function select_ttype()
   {
 
     case 0: {
-      s+='<div class="form-group"><label for="tickets_txt"><nobr>Опишите, что нужно</nobr><br>исправить или<BR>дополнить</label>\
+      s+='<div class="form-group"><label for="tickets_txt">Опишите, что нужно<br>исправить или<BR>дополнить</label>\
       <textarea id="tickets_txt" name="tickets_txt" rows=5></textarea></div>';
     } break;
 
     // добавить издание
      case 3: {
-      if (!ur.indexOf('edition')==-1 & ur.indexOf('autor')==-1 & ur.indexOf('work')==-1 & ur.indexOf('series')==-1) {
+      if (ur.indexOf('edition')==-1 & ur.indexOf('autor')==-1 & ur.indexOf('work')==-1 & ur.indexOf('series')==-1) {
         f=false; 
       s='<div style="color: red; text-align: center"><BR><big>Заявку этого типа можно отправлять лишь<BR>со страниц издания, произведения, автора или серии\
           любого из произведений книги!</big><BR>(Если на сайте нет даже автора - воспользуйтесь общей формой заявки)</div><BR><BR>';
@@ -176,16 +176,16 @@ function select_ttype()
     case 2: {
       s+= '<div class="form-group"><label for="t_name">Интересный факт</label><textarea id="t_content" name="t_content" rows=6></textarea>\
            <addr data-toggle="tooltip" data-container="body" title="Примечание, которое будет интересно широкому кругу читателей, из истории создания произведения, его героев, связь с реальностью и т.п."></addr></div>';
-  
+ 
       s+= '<div class="form-group"><label for="t_name">Ссылка на источник</label>\
-           <input type="text" id="t_url" name="t_url" <addr data-toggle="tooltip" data-container="body" title="для одобрения вашего &quot;факта&quot;, крайне желательно указать источник"></addr></div>';
+           <input type="text" id="t_url" name="t_url"><addr data-toggle="tooltip" data-container="body" title="для одобрения вашего &quot;факта&quot;, крайне желательно указать источник"></addr></div>';
     } break;
   }
   // end case
 
   if (f) {
-    s+= '<div class="form-group"><label>Прикрепить файл</label><input name="tickets_file" type="file" value=""></div>\
-         <div class="form-group"><label>&nbsp;</label>&nbsp;<font size="-2" color="gray">(несколько файлов можно послать одним архивом)</font></div>\
+    s+= '<div class="form-group" style="margin-bottom: -2px;"><label>Прикрепить файл</label><input name="tickets_file" type="file" value=""></div>\
+         <div class="form-group"><label>&nbsp;</label><div style="white-space: pre-line;">&nbsp;<font size="-2" color="gray">(несколько файлов можно послать одним архивом)</font></div></div>\
          <label>&nbsp;</label><div align="center"><input type="submit" style="cursor:pointer" onclick="return ticketsSubmit();" style="width:144px" value="отправить заявку">\
          <input type="button" style="cursor:pointer" value="отмена" onclick="return ticketsToggle()"></div>'; 
   }
@@ -218,7 +218,7 @@ function set_stop()
 function GetTXT(elm)
 {
    var elem=document.getElementById(elm);
-        if (typeof elem !== 'undefined' && elem !== null) {return elem.textContent;}
+        if (typeof elem !== 'undefined' && elem !== null) {return $.trim(elem.textContent);}
         else return '';
 }
 
@@ -235,7 +235,7 @@ function ticketsSubmit()
       index = ttype.selectedIndex,
       s='Тип заявки: '+ document.getElementById("tickets_type").value+'\n\n',
       s_json='{';  //"Type": '+index+',\n';
-      
+     
   
   switch(index)
   {
@@ -320,7 +320,7 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
   }
   document.getElementById("tickets_text").value=s; 
   s_json+='}';
-
+  //s_json=JSON.stringify(s_json);
   document.getElementById("data_json").value=s_json;
   console.log(s_json);
     
@@ -332,7 +332,8 @@ ISBN: '+document.getElementById("t_isbn").value+ '\n\
   else
   {
     ticketsform.submit();
-    
+    // return false; 
+   
     this.disabled=true;
    }
 }
