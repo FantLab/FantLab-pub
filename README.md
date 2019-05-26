@@ -17,3 +17,7 @@ FantLab-pub
 
 Верстку можно делать на примерах и размещать на - https://jsbin.com, https://jsfiddle.net или аналогичных сервисах макет-стендов. Когда всё будет ок - добавим в шаблон или выложим в этот репозиторий старые шаблоны для обновления.
 Актуальные задачи смотрите в разделе Issues по меткам [html](https://github.com/FantLab/FantLab-Pub/labels/html) и [help wanted](https://github.com/FantLab/FantLab-pub/labels/help%20wanted)
+
+
+-----
+
