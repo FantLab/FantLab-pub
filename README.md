@@ -1,7 +1,7 @@
-fantlab_pub
+FantLab-pub
 ===========
 
-Репозиторий с задачками по коду для Фантлаба.
+Репозиторий с текущими дев-задачами проекта Фантлаб.
 Актуальные тикеты см в Issues - https://github.com/parserpro/FantLab-pub/issues
 
 
@@ -14,4 +14,4 @@ fantlab_pub
 Приветствуется красота, простота, минимализм и аккуратность в обновлении кода. Хорошая документированость для удобной поддержки кода сообществом.
 
 Верстку можно делать на примерах и размещать на - https://jsbin.com, https://jsfiddle.net или аналогичных сервисах макет-стендов. Когда всё будет ок - добавим в шаблон или выложим в этот репозиторий старые шаблоны для обновления.
-Актуальные задачи смотрите в разделе Issues по меткам [html](https://github.com/parserpro/fantlab_pub/labels/html) и [help wanted](https://github.com/parserpro/fantlab_pub/labels/help%20wanted)
+Актуальные задачи смотрите в разделе Issues по меткам [html](https://github.com/parserpro/FantLab-Pub/labels/html) и [help wanted](https://github.com/parserpro/FantLab-pub/labels/help%20wanted)
